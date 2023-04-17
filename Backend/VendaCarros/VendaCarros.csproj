@@ -28,7 +28,10 @@
 
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Utils\" />
     <Folder Include="Options\" />
+    <Folder Include="ViewModel\UsuarioViewModels\" />
   </ItemGroup>
 
 </Project>

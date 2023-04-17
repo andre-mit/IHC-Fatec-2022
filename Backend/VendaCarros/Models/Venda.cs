@@ -8,7 +8,7 @@ public class Venda : BaseModel
     public decimal Valor { get; set; }
     public decimal Comissao { get; set; }
     public Colaborador Vendedor { get; set; }
-    public Carro Carro { get; set; }
+    public Veiculo Carro { get; set; }
     public List<Opcional> Opcionais { get; set; }
 
     public Venda()
@@ -16,7 +16,7 @@ public class Venda : BaseModel
 
     }
 
-    public Venda(DateTime dataVenda, decimal valor, decimal comissao, Colaborador vendedor, Carro carro, List<Opcional> opcionais)
+    public Venda(DateTime dataVenda, decimal valor, decimal comissao, Colaborador vendedor, Veiculo carro, List<Opcional> opcionais)
     {
         DataVenda = dataVenda;
         Valor = valor;

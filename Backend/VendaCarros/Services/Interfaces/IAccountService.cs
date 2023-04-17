@@ -4,6 +4,6 @@ namespace VendaCarros.Services.Interfaces;
 
 public interface IAccountService
 {
-    Usuario Authenticate(string nomeUsuario, string senha);
-    void Register(Usuario usuario);
+    Usuario? Authenticate(string email, string senha);
+    Task<Usuario> Register(Usuario usuario);
 }

@@ -4,15 +4,10 @@ namespace VendaCarros.Models;
 
 public class Usuario : BaseModel
 {
-    public string NomeUsuario { get; set; }
+    public string Email { get; set; }
     public string Senha { get; set; }
 
-    private Funcao _funcao;
+    public Colaborador Colaborador { get; set; }
 
-    public string Funcao
-    {
-        get => Enum.GetName(_funcao) ?? string.Empty;
-        set => _funcao = Enum.Parse<Funcao>(value);
-    }
-
+    public Funcao Funcao { get; set; }
 }

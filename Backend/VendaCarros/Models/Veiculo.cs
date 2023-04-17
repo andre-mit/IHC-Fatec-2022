@@ -1,6 +1,6 @@
 ﻿namespace VendaCarros.Models;
 
-public class Carro : BaseModel
+public class Veiculo : BaseModel
 {
     public int Ano { get; set; }
     public string Cor { get; set; }
@@ -9,12 +9,12 @@ public class Carro : BaseModel
     public Modelo Modelo { get; set; }
     public List<Venda> Vendas { get; set; }
 
-    public Carro()
+    public Veiculo()
     {
 
     }
 
-    public Carro(int ano, string cor, decimal preco, bool disponivel, Modelo modelo)
+    public Veiculo(int ano, string cor, decimal preco, bool disponivel, Modelo modelo)
     {
         Ano = ano;
         Cor = cor;

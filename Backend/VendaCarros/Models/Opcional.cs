@@ -4,7 +4,7 @@ public class Opcional : BaseModel
 {
     public string Name { get; set; }
     public decimal Preco { get; set; }
-    public Carro Carro { get; set; }
+    public Veiculo Carro { get; set; }
     public List<Venda> Vendas { get; set; }
 
     public Opcional()
@@ -12,7 +12,7 @@ public class Opcional : BaseModel
         
     }
 
-    public Opcional(string name, decimal preco, Carro carro)
+    public Opcional(string name, decimal preco, Veiculo carro)
     {
         Name = name;
         Preco = preco;
