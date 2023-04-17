@@ -1,6 +1,8 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using VendaCarros.Data;
 using VendaCarros.Options;
 using VendaCarros.Services;
 using VendaCarros.Services.Interfaces;
@@ -14,6 +16,10 @@ builder.Services.AddCors();
 
 builder.Services.AddOptions<AuthOptions>().Bind(builder.Configuration.GetSection("AuthSettings"));
 
+builder.Services.AddDbContext<VendaContext>(options =>
+       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
 var secretJwt = builder.Configuration.GetValue<string>("AuthSettings:TokenSecret");

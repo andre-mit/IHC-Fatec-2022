@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using VendaCarros.Enums;
 using VendaCarros.Services.Interfaces;
 using VendaCarros.ViewModel.UsuarioViewModels;
 
 namespace VendaCarros.Controllers;
 
 // Todo: Implementar o controller de usuários (autenticação e cadastro)
+[ApiController]
+[Route("api/[controller]")]
 public class UsuarioController : Controller
 {
     private readonly ILogger<UsuarioController> _logger;
@@ -46,8 +50,31 @@ public class UsuarioController : Controller
         }
     }
 
-    [HttpPost("register")]
-    public IActionResult Register([FromBody] RegisterRequestViewModel model)
+    [Authorize(Roles = nameof(Funcao.Colaborador))]
+    [Authorize(Roles = $"{nameof(Cargo.Gerente)},{nameof(Cargo.Diretor)}")]
+    [HttpPost("cadastrar/vendedor")]
+    public IActionResult CadastrarVendedor([FromBody] RegisterRequestViewModel model)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        try
+        {
+            _accountService.Register(model.ToUsuario());
+            _logger.LogInformation("Usuário registrado com sucesso");
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao registrar usuário");
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [Authorize(Roles = nameof(Funcao.Colaborador))]
+    [Authorize(Roles = nameof(Cargo.Diretor))]
+    [HttpPost("cadastrar/gerente")]
+    public IActionResult CadastrarGerente([FromBody] RegisterRequestViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
