@@ -32,7 +32,7 @@ public class RegisterRequestViewModel
             Email = Email,
             Senha = Senha,
             Funcao = Funcao,
-            Colaborador = ToColaborador()
+            Colaboradores = ToColaborador()
         };
     }
 

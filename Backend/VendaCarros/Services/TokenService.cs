@@ -31,7 +31,7 @@ public class TokenService : ITokenService
         });
 
         if (usuario.Funcao == Funcao.Colaborador)
-            claims.AddClaim(new(ClaimTypes.Role, usuario.Colaborador.Cargo.ToString()));
+            claims.AddClaim(new(ClaimTypes.Role, usuario.Colaboradores.Cargo.ToString()));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

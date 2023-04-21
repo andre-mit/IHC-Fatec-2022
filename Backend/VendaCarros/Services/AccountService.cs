@@ -29,7 +29,7 @@ public class AccountService : IAccountService
     public async Task<Usuario> Register(Usuario usuario)
     {
         usuario.Senha = usuario.Senha.HashPassword();
-        usuario.Colaborador = await _colaboradorRepository.AddColaborador(usuario.Colaborador);
+        usuario.Colaboradores = await _colaboradorRepository.AddColaborador(usuario.Colaboradores);
         usuario = await _usuarioRepository.AddUsuario(usuario);
 
         return usuario;

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using VendaCarros.Data;
+using VendaCarros.Data.Repository;
+using VendaCarros.Data.Repository.Interfaces;
 using VendaCarros.Options;
 using VendaCarros.Services;
 using VendaCarros.Services.Interfaces;
@@ -19,8 +21,11 @@ builder.Services.AddOptions<AuthOptions>().Bind(builder.Configuration.GetSection
 builder.Services.AddDbContext<VendaContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddSingleton<IAccountService, AccountService>();
-builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddTransient<IColaboradorRepository, ColaboradorRepository>();
 
 var secretJwt = builder.Configuration.GetValue<string>("AuthSettings:TokenSecret");
 var key = Encoding.ASCII.GetBytes(secretJwt!);

@@ -9,6 +9,7 @@ namespace VendaCarros.Controllers;
 // Todo: Implementar o controller de usuários (autenticação e cadastro)
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = nameof(Funcao.Colaborador))]
 public class UsuarioController : Controller
 {
     private readonly ILogger<UsuarioController> _logger;
@@ -23,6 +24,7 @@ public class UsuarioController : Controller
         _tokenService = tokenService;
     }
 
+    [AllowAnonymous]
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequestViewModel model)
     {
@@ -50,7 +52,6 @@ public class UsuarioController : Controller
         }
     }
 
-    [Authorize(Roles = nameof(Funcao.Colaborador))]
     [Authorize(Roles = $"{nameof(Cargo.Gerente)},{nameof(Cargo.Diretor)}")]
     [HttpPost("cadastrar/vendedor")]
     public IActionResult CadastrarVendedor([FromBody] RegisterRequestViewModel model)
@@ -70,8 +71,7 @@ public class UsuarioController : Controller
             return BadRequest(ex.Message);
         }
     }
-
-    [Authorize(Roles = nameof(Funcao.Colaborador))]
+    
     [Authorize(Roles = nameof(Cargo.Diretor))]
     [HttpPost("cadastrar/gerente")]
     public IActionResult CadastrarGerente([FromBody] RegisterRequestViewModel model)

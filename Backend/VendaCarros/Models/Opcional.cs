@@ -2,9 +2,10 @@
 
 public class Opcional : BaseModel
 {
-    public string Name { get; set; }
+    public string Nome { get; set; }
     public decimal Preco { get; set; }
-    public Veiculo Carro { get; set; }
+    public List<Veiculo> Veiculos { get; set; }
+
     public List<Venda> Vendas { get; set; }
 
     public Opcional()
@@ -12,10 +13,9 @@ public class Opcional : BaseModel
         
     }
 
-    public Opcional(string name, decimal preco, Veiculo carro)
+    public Opcional(string nome, decimal preco)
     {
-        Name = name;
+        Nome = nome;
         Preco = preco;
-        Carro = carro;
     }
 }
