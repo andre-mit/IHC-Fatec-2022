@@ -17,7 +17,7 @@ public class VendaConfiguration : IEntityTypeConfiguration<Venda>
             .HasOne(v => v.Vendedor)
             .WithMany(v => v.Vendas)
             .HasForeignKey(v => v.VendedorId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.ClientNoAction);
 
         builder
             .HasOne(v => v.Veiculo)
