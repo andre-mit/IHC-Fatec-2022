@@ -27,17 +27,17 @@ public class UsuarioController : Controller
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequestViewModel model)
+    public async Task<IActionResult> Login([FromBody] LoginRequestViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         try
         {
-            var usuario = _accountService.Authenticate(model.Usuario, model.Senha, model.Funcao);
+            var usuario = await _accountService.Authenticate(model.Usuario, model.Senha, model.Funcao);
             if (usuario is null)
             {
-                _logger.LogInformation("Usuário autenticado com sucesso");
+                _logger.LogTrace("Usuário não autenticado");
                 return Unauthorized();
             }
 

@@ -9,18 +9,21 @@ namespace VendaCarros.Services;
 public class AccountService : IAccountService
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IColaboradorRepository _colaboradorRepository;
 
-    public AccountService(IUsuarioRepository usuarioRepository)
+    public AccountService(IUsuarioRepository usuarioRepository, IColaboradorRepository colaboradorRepository)
     {
         _usuarioRepository = usuarioRepository;
+        _colaboradorRepository = colaboradorRepository;
     }
 
-    public Usuario? Authenticate(string email, string senha, Funcao funcao)
+    // Todo: Implementar Perfil de Cliente
+    public async Task<Usuario?> Authenticate(string email, string senha, Funcao funcao)
     {
-        var usuario = new Usuario { Email = email, Senha = senha };
+        var perfil = funcao != Funcao.Cliente ? await _colaboradorRepository.GetColaboradorByEmailAsync(email, funcao) : null;
 
-        if (BCrypt.Net.BCrypt.Verify(usuario.Senha, usuario.Senha))
-            return usuario;
+        if (perfil is not null && BCrypt.Net.BCrypt.Verify(senha, perfil.Usuario.Senha))
+            return perfil.Usuario;
 
         return null;
     }

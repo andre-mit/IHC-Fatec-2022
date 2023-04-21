@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VendaCarros.Data.Repository.Interfaces;
+using VendaCarros.Enums;
 using VendaCarros.Exceptions;
 using VendaCarros.Models;
 
@@ -16,7 +17,19 @@ public class ColaboradorRepository : BaseRepository, IColaboradorRepository
 
     public async Task<Colaborador?> GetColaboradorByDocumentoAsync(string documento)
     {
-        return await _context.Colaboradores.FirstOrDefaultAsync(u => u.Documento == documento);
+        return await _context.Colaboradores.FirstOrDefaultAsync(c => c.Documento == documento);
+    }
+
+    public async Task<Colaborador?> GetColaboradorByUsuarioAsync(int usuarioId)
+    {
+        return await _context.Colaboradores.FirstOrDefaultAsync(c => c.UsuarioId == usuarioId);
+    }
+
+    public async Task<Colaborador?> GetColaboradorByEmailAsync(string email, Funcao funcao = Funcao.Vendedor)
+    {
+        return await _context.Colaboradores
+            .Include(x => x.Usuario)
+            .FirstOrDefaultAsync(c => c.Usuario.Email == email && c.Usuario.Funcao == funcao);
     }
 
     public async Task<Colaborador> AddColaborador(Colaborador colaborador)

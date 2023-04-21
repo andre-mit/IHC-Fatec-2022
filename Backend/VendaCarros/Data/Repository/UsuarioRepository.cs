@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VendaCarros.Data.Repository.Interfaces;
+using VendaCarros.Enums;
 using VendaCarros.Exceptions;
 using VendaCarros.Models;
 
@@ -14,9 +15,9 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
         _context = context;
     }
 
-    public async Task<Usuario?> GetUsuarioByEmailAsync(string email)
+    public async Task<Usuario?> GetUsuarioByEmailAsync(string email, Funcao funcao = Funcao.Vendedor)
     {
-        return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+        return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email && u.Funcao == funcao);
     }
 
     public async Task<Usuario> AddUsuario(Usuario usuario)
