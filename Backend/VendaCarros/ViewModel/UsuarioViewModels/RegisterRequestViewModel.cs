@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using VendaCarros.Enums;
 using VendaCarros.Models;
+using VendaCarros.Utils.Attributes;
 
 namespace VendaCarros.ViewModel.UsuarioViewModels;
 
@@ -15,6 +17,9 @@ public class RegisterRequestViewModel
     public string Senha { get; set; }
 
     [Required]
+    public DateOnly DataNascimento { get; set; }
+
+    [Required]
     public Funcao Funcao { get; set; }
 
     [Required]
@@ -23,7 +28,25 @@ public class RegisterRequestViewModel
     [Required]
     [MaxLength(14)]
     public string Documento { get; set; }
-    public Cargo Cargo { get; set; }
+
+    [Required]
+    [MaxLength(14)]
+    public TipoDocumento TipoDocumento { get; set; }
+
+    [Required]
+    [MaxLength(20)]
+    public string Telefone { get; set; }
+
+
+    [ConditionalRequired(nameof(Funcao), Funcao.Cliente)]
+    public string Cep { get; set; }
+
+    [ConditionalRequired(nameof(Funcao), Funcao.Cliente)]
+    public string Logradouro { get; set; }
+
+    public string? Numero { get; set; }
+
+    public string? Complemento { get; set; }
 
     public Usuario ToUsuario()
     {
@@ -31,8 +54,7 @@ public class RegisterRequestViewModel
         {
             Email = Email,
             Senha = Senha,
-            Funcao = Funcao,
-            Colaboradores = ToColaborador()
+            Funcao = Funcao
         };
     }
 
@@ -42,7 +64,27 @@ public class RegisterRequestViewModel
         {
             Nome = Nome,
             Documento = Documento,
-            Cargo = Cargo
+            Telefone = Telefone,
+            DataNascimento = DataNascimento,
+            TipoDocumento = TipoDocumento,
+            Usuario = ToUsuario()
+        };
+    }
+
+    public Cliente ToCliente()
+    {
+        return new Cliente
+        {
+            Nome = Nome,
+            Documento = Documento,
+            Telefone = Telefone,
+            Cep = Cep,
+            Logradouro = Logradouro,
+            Numero = Numero,
+            Complemento = Complemento,
+            DataNascimento = DataNascimento,
+            TipoDocumento = TipoDocumento,
+            Usuario = ToUsuario()
         };
     }
 }

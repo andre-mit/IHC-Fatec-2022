@@ -12,6 +12,13 @@ public class VendaConfiguration : IEntityTypeConfiguration<Venda>
         builder.Property(v => v.DataVenda).IsRequired();
 
         builder.Property(v => v.Valor).IsRequired();
+
+        builder
+            .HasOne(v => v.Vendedor)
+            .WithMany(v => v.Vendas)
+            .HasForeignKey(v => v.VendedorId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder
             .HasOne(v => v.Veiculo)
             .WithMany(v => v.Vendas)

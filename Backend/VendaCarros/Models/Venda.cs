@@ -31,7 +31,7 @@ public class Venda : BaseModel
         DataVenda = dataVenda;
         Valor = valor;
         Vendedor = vendedor;
-        Comissao = vendedor.Cargo == Cargo.Vendedor ? comissao : 0;
+        Comissao = comissao;
         Veiculo = veiculo;
         Opcionais = opcionais;
     }

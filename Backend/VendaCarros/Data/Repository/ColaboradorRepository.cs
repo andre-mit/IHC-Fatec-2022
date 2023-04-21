@@ -28,6 +28,11 @@ public class ColaboradorRepository : BaseRepository, IColaboradorRepository
         return registered.Entity;
     }
 
+    public async Task AddColaboradores(IEnumerable<Colaborador> colaboradores)
+    {
+        await _context.Colaboradores.AddRangeAsync(colaboradores);
+    }
+
     public Task<bool> ExistsAsync(string documento)
     {
         return _context.Colaboradores.AnyAsync(u => u.Documento == documento);

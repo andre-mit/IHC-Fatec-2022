@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendaCarros.Enums;
+using VendaCarros.Models;
+using VendaCarros.Services.Helpers;
 using VendaCarros.Services.Interfaces;
 using VendaCarros.ViewModel.UsuarioViewModels;
 
@@ -9,7 +11,6 @@ namespace VendaCarros.Controllers;
 // Todo: Implementar o controller de usuários (autenticação e cadastro)
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = nameof(Funcao.Colaborador))]
 public class UsuarioController : Controller
 {
     private readonly ILogger<UsuarioController> _logger;
@@ -33,14 +34,15 @@ public class UsuarioController : Controller
 
         try
         {
-            var usuario = _accountService.Authenticate(model.Usuario, model.Senha);
+            var usuario = _accountService.Authenticate(model.Usuario, model.Senha, model.Funcao);
             if (usuario is null)
             {
                 _logger.LogInformation("Usuário autenticado com sucesso");
                 return Unauthorized();
             }
 
-            var token = _tokenService.GenerateToken(usuario);
+            var usuarioToken = new UsuarioToken(usuario, usuario.Funcao);
+            var token = _tokenService.GenerateToken(usuarioToken);
             var response = new LoginResponseViewModel(usuario.Email, usuario.Funcao, token);
 
             return Ok(response);
@@ -52,7 +54,7 @@ public class UsuarioController : Controller
         }
     }
 
-    [Authorize(Roles = $"{nameof(Cargo.Gerente)},{nameof(Cargo.Diretor)}")]
+    [Authorize(Roles = $"{nameof(Funcao.Gerente)},{nameof(Funcao.Diretor)}")]
     [HttpPost("cadastrar/vendedor")]
     public IActionResult CadastrarVendedor([FromBody] RegisterRequestViewModel model)
     {
@@ -72,7 +74,7 @@ public class UsuarioController : Controller
         }
     }
     
-    [Authorize(Roles = nameof(Cargo.Diretor))]
+    [Authorize(Roles = nameof(Funcao.Diretor))]
     [HttpPost("cadastrar/gerente")]
     public IActionResult CadastrarGerente([FromBody] RegisterRequestViewModel model)
     {

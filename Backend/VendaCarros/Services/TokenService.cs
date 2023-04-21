@@ -1,11 +1,11 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using VendaCarros.Enums;
-using VendaCarros.Models;
 using VendaCarros.Options;
+using VendaCarros.Services.Helpers;
 using VendaCarros.Services.Interfaces;
 
 namespace VendaCarros.Services;
@@ -19,7 +19,7 @@ public class TokenService : ITokenService
         _authOptions = authOptions.Value;
     }
 
-    public string GenerateToken(Usuario usuario)
+    public string GenerateToken(UsuarioToken usuario)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_authOptions.TokenSecret);
@@ -27,11 +27,8 @@ public class TokenService : ITokenService
         {
             new(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
             new(ClaimTypes.Name, usuario.Email),
-            new(ClaimTypes.Role, usuario.Funcao.ToString()),
+            new(ClaimTypes.Role, usuario.Funcao.ToString())
         });
-
-        if (usuario.Funcao == Funcao.Colaborador)
-            claims.AddClaim(new(ClaimTypes.Role, usuario.Colaboradores.Cargo.ToString()));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

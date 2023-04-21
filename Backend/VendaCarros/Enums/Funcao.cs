@@ -4,8 +4,12 @@ namespace VendaCarros.Enums;
 
 public enum Funcao : byte
 {
-    [Description(nameof(Colaborador))]
-    Colaborador,
     [Description(nameof(Cliente))]
-    Cliente
+    Cliente,
+    [Description(nameof(Vendedor))]
+    Vendedor,
+    [Description(nameof(Gerente))]
+    Gerente,
+    [Description(nameof(Diretor))]
+    Diretor
 }
