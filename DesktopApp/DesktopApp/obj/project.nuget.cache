@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "GuwUGxDDa1H394+4OdgJtg/4NqulYpqMAXeGIJZLz9rDSLNgvjn++V56LZax2VLSQZp4KOnkxOZd3vIRYR9T5Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\andre\\Documents\\projects\\IHC\\DesktopApp\\DesktopApp\\DesktopApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.0\\communitytoolkit.mvvm.8.2.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
+  "logs": []
+}

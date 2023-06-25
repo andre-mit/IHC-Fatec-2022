@@ -1,0 +1,12 @@
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.csproj.AssemblyReference.cache
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.AssemblyInfoInputs.cache
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.AssemblyInfo.cs
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.csproj.CoreCompileInputs.cache
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\bin\Debug\net7.0\Venda.Shared.deps.json
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\bin\Debug\net7.0\Venda.Shared.dll
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\bin\Debug\net7.0\Venda.Shared.pdb
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.dll
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\refint\Venda.Shared.dll
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\Venda.Shared.pdb
+C:\Users\andre\Documents\projects\IHC\Shared\Venda.Shared\obj\Debug\net7.0\ref\Venda.Shared.dll
